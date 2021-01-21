@@ -7,6 +7,6 @@ Created using Java 14.0.1
 run with an IDE or
 run on cmd:
 mkdir bin
-javac *.class -d bin
+javac src/*.class -d bin
 cd bin
 java SudokuSolver
