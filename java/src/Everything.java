@@ -86,7 +86,7 @@ public class Everything extends JFrame {
 			buttons.buttons[i].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					String c = e.getActionCommand();
-					if(c == "<-") message.setText(board.setBox(0));
+					if("<-".equals(c)) message.setText(board.setBox(0));
 					else {
 						message.setText(board.setBox(Integer.valueOf(c)));
 					}

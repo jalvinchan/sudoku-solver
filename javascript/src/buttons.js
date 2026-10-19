@@ -5,6 +5,7 @@ class Buttons{
         this.width = w;
         this.height = h;
         this.board = board;
+        this.solveTime = null;
 
         this.buttonWidth = 80;
         this.buttonHeight = 40;
@@ -42,6 +43,7 @@ class Buttons{
     drawSolved(){
         ctx.clearRect(this.x, this.y, this.width, this.height);
         this.drawButton([this.buttons.back, this.buttons.reset]);
+        this.drawSolveTime();
     }
 
     drawButton(buttons){
@@ -59,6 +61,15 @@ class Buttons{
         })
     }
 
+    drawSolveTime(){
+        if(this.solveTime === null) return;
+
+        ctx.font = "15px Arial";
+        ctx.fillStyle = "white";
+        ctx.textAlign = "center";
+        ctx.fillText(`Solved in ${this.solveTime.toFixed(2)} ms`, this.x + this.width/2, this.y + 30);
+    }
+
     click(x,y){
         if(this.inside(this.buttons.reset, x, y)) this.clickReset();
         else if(this.inside(this.buttons.solve, x, y)){
@@ -69,7 +80,9 @@ class Buttons{
     
     clickSolve(){
         if(!this.board.solved){
+            const startTime = performance.now();
             if(this.board.solve()){
+                this.solveTime = performance.now() - startTime;
                 this.drawSolved();
             }
         }else{
@@ -79,12 +92,14 @@ class Buttons{
     }
 
     clickReset(){
-        board.reset();
+        this.solveTime = null;
+        this.board.reset();
         this.drawSolve();
     }
 
     clickBack(){
         this.board.solved = false;
+        this.drawSolve();
     }
 
     inside(button,x,y){

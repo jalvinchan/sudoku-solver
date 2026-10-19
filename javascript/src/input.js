@@ -1,5 +1,5 @@
 class InputHandler{
-    constructor(canvas, ctx, board, button){
+    constructor(canvas, ctx, board, buttons){
         canvas.addEventListener("mousedown", e=>{
             board.setSelected(e.offsetX, e.offsetY);
             buttons.click(e.offsetX, e.offsetY);
